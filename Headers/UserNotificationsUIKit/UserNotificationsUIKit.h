@@ -2,4 +2,5 @@
 #import "NCNotificationShortLookView.h"
 #import "NCNotificationListCell.h"
 #import "NCNotificationShortLookViewController.h"
+#import "NCNotificationShortLookViewController+Borealis.h"
 #import "NCNotificationViewControllerDelegate.h"
