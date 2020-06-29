@@ -1,0 +1,9 @@
+Package: com.shade.borealis
+Name: Borealis
+Depends: mobilesubstrate (>= 0.9.5000)
+Version: 0.1
+Architecture: iphoneos-arm
+Description: Color your notifications
+Maintainer: Shade Zepheri <ziroalpha@gmail.com>
+Author: Shade Zepheri <ziroalpha@gmail.com>
+Section: Tweaks
