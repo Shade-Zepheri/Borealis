@@ -9,9 +9,9 @@
 
 #pragma mark - CoverSheet
 
-%hook NCNotificationGroupList
+%hook NCNotificationListCache
 
-- (NCNotificationListCell *)_cachedCellForNotificationRequest:(NCNotificationRequest *)notificationRequest createNewIfNecessary:(BOOL)createNew shouldConfigure:(BOOL)shouldConfigure {
+ - (NCNotificationListCell *)listCellForNotificationRequest:(NCNotificationRequest *)notificationRequest viewControllerDelegate:(id<NCNotificationViewControllerDelegate>)viewControllerDelegate createNewIfNecessary:(BOOL)createNewIfNecessary shouldConfigure:(BOOL)shouldConfigure {
 	// Since cells are reused, this makes sure the colors are properly set
 	// Hijack cell
 	NCNotificationListCell *resultingCell = %orig;
