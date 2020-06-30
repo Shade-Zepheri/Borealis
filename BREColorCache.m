@@ -1,4 +1,6 @@
 #import "BREColorCache.h"
+#import "UIColor+Similar.h"
+#import <Palette/Palette.h>
 #import <UIKit/UIImage+Private.h>
 
 @interface BREColorCache () {
@@ -39,21 +41,17 @@
 
 #pragma mark - Color Analysis
 
-- (UIColor *)_averageColorForImage:(UIImage *)image {
-    CIImage *inputImage = image.CIImage ?: [CIImage imageWithCGImage:image.CGImage];
-    if (!inputImage) {
-        // No image, fallback
-        return [UIColor grayColor];
+- (UIColor *)_primaryColorForImage:(UIImage *)image {
+    // Get color palette
+    UIImageColorPalette *colorPalette = [image retrieveColorPaletteWithQuality:UIImageResizeQualityMedium];
+    UIColor *primaryColor = colorPalette.primary;
+
+    // Analyze color
+    if ([primaryColor isSimilarToColor:[UIColor systemBackgroundColor]] && colorPalette.secondary) {
+        primaryColor = colorPalette.secondary;
     }
 
-    CIFilter *filter = [CIFilter filterWithName:@"CIAreaAverage" withInputParameters:@{kCIInputImageKey: inputImage, kCIInputExtentKey: [CIVector vectorWithCGRect:inputImage.extent]}];
-    CIImage *outputImage = filter.outputImage;
-
-    UInt8 bitmap[4];
-    CIContext *context = [CIContext contextWithOptions:@{kCIContextWorkingColorSpace: [NSNull null]}];
-    CGRect bounds  = CGRectMake(0, 0, 1, 1);
-    [context render:outputImage toBitmap:&bitmap rowBytes:4 bounds:bounds format:kCIFormatRGBA8 colorSpace:nil];
-    return [UIColor colorWithRed:bitmap[0] / 255.0 green:bitmap[1] / 255.0 blue:bitmap[2] / 255.0 alpha:bitmap[3] / 255.0];
+    return primaryColor;
 }
 
 - (UIColor *)_analyzeIdentifier:(NSString *)identifier {
@@ -62,7 +60,7 @@
     dispatch_sync(_processingQueue, ^{
         // Get color and pass on
         UIImage *appIcon = [UIImage _applicationIconImageForBundleIdentifier:identifier format:0 scale:[UIScreen mainScreen].scale];
-        averageColor = [self _averageColorForImage:appIcon];
+        averageColor = [self _primaryColorForImage:appIcon];
     });
 
     // Add to cache

@@ -1,6 +1,6 @@
 Package: com.shade.borealis
 Name: Borealis
-Depends: mobilesubstrate (>= 0.9.5000)
+Depends: mobilesubstrate (>= 0.9.5000), com.shade.libpalette
 Version: 0.1
 Architecture: iphoneos-arm
 Description: Color your notifications

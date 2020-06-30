@@ -8,10 +8,11 @@ export ADDITIONAL_CFLAGS = -DTHEOS_LEAN_AND_MEAN -fobjc-arc
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = Borealis
-Borealis_FILES = $(wildcard *.[xm])
+Borealis_FILES = $(wildcard *.[xm]) $(wildcard Extensions/*.[xm])
 Borealis_FRAMEWORKS = Foundation QuartzCore UIKit
 Borealis_EXTRA_FRAMEWORKS = Cephei
-Borealis_CFLAGS = -IHeaders
+Borealis_LIBRARIES = palette
+Borealis_CFLAGS = -IHeaders -IExtensions
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
