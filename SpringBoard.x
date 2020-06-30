@@ -37,7 +37,7 @@
 	NSString *sectionIdentifier = notificationRequest.sectionIdentifier;
 	UIColor *averageColor = [[BREColorCache mainCache] cachedColorForIdentifier:sectionIdentifier];
 	MTColor *materialColor = [%c(MTColor) colorWithCGColor:averageColor.CGColor];
-	MTColor *adjustedMaterialColor = [materialColor colorWithAlphaComponent:0.23];
+	MTColor *adjustedMaterialColor = [materialColor colorWithAlphaComponent:0.30];
 
 	// Edit backdrop layer
 	[materialLayer _mt_setColorMatrix:adjustedMaterialColor.sourceOverColorMatrix withName:@"opacityColorMatrix" filterOrder:@[@"luminanceMap"] removingIfIdentity:NO];
