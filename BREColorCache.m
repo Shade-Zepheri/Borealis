@@ -51,7 +51,7 @@
     UIColor *primaryColor = colorPalette.primary;
 
     // Analyze color
-    if ([primaryColor isSimilarToColor:[UIColor systemBackgroundColor]] && colorPalette.secondary) {
+    if (([primaryColor isSimilarToColor:[UIColor whiteColor]] || [primaryColor isSimilarToColor:[UIColor blackColor]]) && colorPalette.secondary) {
         primaryColor = colorPalette.secondary;
     }
 
