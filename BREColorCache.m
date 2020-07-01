@@ -42,6 +42,10 @@
 #pragma mark - Color Analysis
 
 - (UIColor *)_primaryColorForImage:(UIImage *)image {
+    if (!image) {
+        return [UIColor grayColor];
+    }
+
     // Get color palette
     UIImageColorPalette *colorPalette = [image retrieveColorPaletteWithQuality:UIImageResizeQualityMedium];
     UIColor *primaryColor = colorPalette.primary;
